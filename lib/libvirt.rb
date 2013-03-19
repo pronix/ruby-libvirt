@@ -69,6 +69,7 @@ module Libvirt
           'the domain is shut off'
         when 6
           'the domain is crashed'
+          cause =['VIR_DOMAIN_CRASHED_UNKNOWN','VIR_DOMAIN_CRASHED_LAST']
         when 7
           'the domain is suspended by guest power management'
         when 8
