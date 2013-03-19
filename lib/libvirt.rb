@@ -41,41 +41,49 @@ module Libvirt
     class Domain
       def state_s
         s=self.state
-        s[0] # state
-        s[1] # reason
         res=[]
-        res[0] = case s[0]
+        case s[0]
         when 0
-          'no state'
+          res[0]='no state'
         when 1
-          'the domain is running'
+          res[0]='the domain is running'
+          reason={0=>'VIR_DOMAIN_RUNNING_UNKNOWN  ',
+            1=>'normal startup from boot',
+            2=>'migrated from another host',
+            3=>'restored from a state file',
+            4=>'restored from snapshot',
+            5=>'returned from paused state',
+            6=>'returned from migration',
+            7=>'returned from failed save process',
+            8=>'returned from pmsuspended due to wakeup event',
+            9=>'VIR_DOMAIN_RUNNING_LAST'}
         when 2
-          'the domain is blocked on resource'
+          res[0]='the domain is blocked on resource'
         when 3
-          'the domain is paused by user'
-          cause=['the reason is unknown',
-            'paused on user request',
-            'paused for offline migration',
-            'paused for save',
-            'paused for offline core dump',
-            'paused due to a disk I/O error',
-            'paused due to a watchdog event',
-            'paused after restoring from snapshot',
-            'paused during shutdown process',
-            'paused while creating a snapshot']
+          res[0]='the domain is paused by user'
+          reason={0=>'the reason is unknown',
+            1=>'paused on user request',
+            2=>'paused for offline migration',
+            3=>'paused for save',
+            4=>'paused for offline core dump',
+            5=>'paused due to a disk I/O error',
+            6=>'paused due to a watchdog event',
+            7=>'paused after restoring from snapshot',
+            8=>'paused during shutdown process',
+            9=>'paused while creating a snapshot'}
         when 4
-          'the domain is being shut down'
+          res[0]='the domain is being shut down'
         when 5
-          'the domain is shut off'
+          res[0]='the domain is shut off'
         when 6
-          'the domain is crashed'
-          cause =['VIR_DOMAIN_CRASHED_UNKNOWN','VIR_DOMAIN_CRASHED_LAST']
+          res[0]='the domain is crashed'
+          reason={0=>'VIR_DOMAIN_CRASHED_UNKNOWN',1=>'VIR_DOMAIN_CRASHED_LAST'}
         when 7
-          'the domain is suspended by guest power management'
+          res[0]='the domain is suspended by guest power management'
         when 8
-          'NB: this enum value will increase over time as new events are added to the libvirt API. It reflects the last state supported by this version of the libvirt API.'
+          res[0]='NB: this enum value will increase over time as new events are added to the libvirt API. It reflects the last state supported by this version of the libvirt API.'
         end
-          res[1]=cause[s[1]]
+          res[1]=reason[s[1]]
           return res
       end
     end
