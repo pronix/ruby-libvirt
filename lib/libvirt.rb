@@ -53,6 +53,16 @@ module Libvirt
           'the domain is blocked on resource'
         when 3
           'the domain is paused by user'
+          cause=['the reason is unknown',
+            'paused on user request',
+            'paused for offline migration',
+            'paused for save',
+            'paused for offline core dump',
+            'paused due to a disk I/O error',
+            'paused due to a watchdog event',
+            'paused after restoring from snapshot',
+            'paused during shutdown process',
+            'paused while creating a snapshot']
         when 4
           'the domain is being shut down'
         when 5
@@ -64,6 +74,8 @@ module Libvirt
         when 8
           'NB: this enum value will increase over time as new events are added to the libvirt API. It reflects the last state supported by this version of the libvirt API.'
         end
+          res[1]=cause[s[1]]
+          return res
       end
     end
 end
