@@ -78,6 +78,10 @@ module Libvirt
             9=>'paused while creating a snapshot'}
         when 4
           res[0]='the domain is being shut down'
+          reason ={
+            0 => 'VIR_DOMAIN_SHUTDOWN_UNKNOWN',
+            1 => 'shutting down on user request',
+            2 => 'VIR_DOMAIN_SHUTDOWN_LAST'}
         when 5
           res[0]='the domain is shut off'
         when 6
