@@ -84,6 +84,18 @@ module Libvirt
             2 => 'VIR_DOMAIN_SHUTDOWN_LAST'}
         when 5
           res[0]='the domain is shut off'
+          reson ={
+            0 => 'the reason is unknown',
+            1 => 'normal shutdown',
+            2 => 'forced poweroff',
+            3 => 'domain crashed',
+            4 => 'migrated to another host',
+            5 => 'saved to a file',
+            6 => 'domain failed to start',
+            7 => 'restored from a snapshot which was taken while domain was shutoff',
+            8 => 'VIR_DOMAIN_SHUTOFF_LAST'
+          }
+
         when 6
           res[0]='the domain is crashed'
           reason={0=>'VIR_DOMAIN_CRASHED_UNKNOWN',1=>'VIR_DOMAIN_CRASHED_LAST'}
