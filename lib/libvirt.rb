@@ -47,7 +47,8 @@ module Libvirt
           res[0]='no state'
         when 1
           res[0]='the domain is running'
-          reason={0=>'VIR_DOMAIN_RUNNING_UNKNOWN  ',
+          reason={
+            0=>'VIR_DOMAIN_RUNNING_UNKNOWN  ',
             1=>'normal startup from boot',
             2=>'migrated from another host',
             3=>'restored from a state file',
@@ -59,9 +60,13 @@ module Libvirt
             9=>'VIR_DOMAIN_RUNNING_LAST'}
         when 2
           res[0]='the domain is blocked on resource'
+          reason = {
+            0 => 'VIR_DOMAIN_BLOCKED_UNKNOWN',
+            1 => 'VIR_DOMAIN_BLOCKED_LAST'}
         when 3
           res[0]='the domain is paused by user'
-          reason={0=>'the reason is unknown',
+          reason={
+            0=>'the reason is unknown',
             1=>'paused on user request',
             2=>'paused for offline migration',
             3=>'paused for save',
