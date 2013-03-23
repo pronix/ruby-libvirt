@@ -101,6 +101,10 @@ module Libvirt
           reason={0=>'VIR_DOMAIN_CRASHED_UNKNOWN',1=>'VIR_DOMAIN_CRASHED_LAST'}
         when 7
           res[0]='the domain is suspended by guest power management'
+          reason={
+            0 => 'VIR_DOMAIN_PMSUSPENDED_UNKNOWN',
+            1 => 'VIR_DOMAIN_PMSUSPENDED_LAST'
+          }
         when 8
           res[0]='NB: this enum value will increase over time as new events are added to the libvirt API. It reflects the last state supported by this version of the libvirt API.'
         end
